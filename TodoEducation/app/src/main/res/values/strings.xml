@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Todo Education</string>
-    <string name="alertTitle">Enter new Task :</string>
+    <string name="alertTitle">Enter Task Item:</string>
 </resources>

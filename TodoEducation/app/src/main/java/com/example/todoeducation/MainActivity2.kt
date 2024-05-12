@@ -51,7 +51,7 @@ class MainActivity2 : AppCompatActivity() {
             val builder = AlertDialog.Builder(this)
 
             builder.setTitle(getText(R.string.alertTitle))
-            builder.setMessage("Enter the Todo item below: ")
+            builder.setMessage("Enter the To do item below: ")
 
             val input = EditText(this)
             input.inputType = InputType.TYPE_CLASS_TEXT
