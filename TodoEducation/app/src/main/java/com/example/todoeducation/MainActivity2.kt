@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todoeducation.database.Task
 import com.example.todoeducation.database.TaskDatabase
 import com.example.todoeducation.database.TaskRepository
 import kotlinx.coroutines.CoroutineScope
@@ -40,17 +41,17 @@ class MainActivity2 : AppCompatActivity() {
             }
         }
 
-        val addItem: Button = findViewById(R.id.btnAddTask)
+        val addItem: Button = findViewById(R.id.btnAddItem)
 
         addItem.setOnClickListener {
             displayAlert(repository)
         }
 
-        private fun displayAlert(repository: TaskRepository){
+        fun displayAlert(repository: TaskRepository){
             val builder = AlertDialog.Builder(this)
 
             builder.setTitle(getText(R.string.alertTitle))
-            builder.setMessage("Enter the task item below: ")
+            builder.setMessage("Enter the Todo item below: ")
 
             val input = EditText(this)
             input.inputType = InputType.TYPE_CLASS_TEXT
@@ -60,6 +61,11 @@ class MainActivity2 : AppCompatActivity() {
                 val item = input.text.toString()
                 CoroutineScope(Dispatchers.IO).launch {
                     repository.insert(Task(item))
+
+                    val data = repository.getAllTaskItems()
+                    runOnUiThread{
+                        viewModel.setData(data)
+                    }
                 }
             }
 
@@ -74,4 +80,6 @@ class MainActivity2 : AppCompatActivity() {
 
 
     }
+
+
 }
